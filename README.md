@@ -10,9 +10,9 @@ portable/port.c - We've added a function "vIsEnded"
 ```
 
 ### In file tasks.c:
-
+```
 	#### Update of struct tskTCB. We've added:
-	
+	```
 		unsigned long capacityC; // Task capacity
 		unsigned long periodT;   // period of task
 		unsigned long start;	  // Tick in which task has started
