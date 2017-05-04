@@ -10,8 +10,8 @@ portable/port.c - We've added a function "vIsEnded"
 ```
 
 ### In file tasks.c:
-```
-	#### Update of struct tskTCB. We've added:
+
+	// Update of struct tskTCB. We've added:
 	```
 		unsigned long capacityC; // Task capacity
 		unsigned long periodT;   // period of task
@@ -22,7 +22,7 @@ portable/port.c - We've added a function "vIsEnded"
 		void *vParam;			  // Parameters that are passed to function
 		
 		
-	#### Define struct aptskTCB. This struct describes aperiodic tasks.
+	// Define struct aptskTCB. This struct describes aperiodic tasks.
 	
 		typedef struct aperiodicTaskControlBlock {
 			unsigned long capacityC;	// capacity - execution time of aperiodic task, but it is not real time.
@@ -33,7 +33,7 @@ portable/port.c - We've added a function "vIsEnded"
 		} aptskTCB;
 	
 
-	#### Added some variables on lines 15 to 170
+	// Added some variables on lines 15 to 170
 	
 		PRIVILEGED_DATA static unsigned long serverCapacityC = 0;			// Max capacity of server
 		PRIVILEGED_DATA static unsigned long serverCapacityCCurrent = 0;	// Current capacity of server
@@ -52,7 +52,7 @@ portable/port.c - We've added a function "vIsEnded"
 				
 		
 
-	#### Function vTaskStartScheduler(Linije od 110 do 1115) is key to start server. In fact it calls just xTaskCreate with correct parameters.
+	// Function vTaskStartScheduler(Linije od 110 do 1115) is key to start server. In fact it calls just xTaskCreate with correct parameters.
 	
 		static int runned = 0;
 		if (runned == 0) { // Start server just one time
@@ -68,11 +68,13 @@ portable/port.c - We've added a function "vIsEnded"
 		}
 		runned++;
 	
-	#### Declared function prvServerTick on line 425. Ova f-ja izvrsava kod servera
+	
+	// Declared function prvServerTick on line 425. Ova f-ja izvrsava kod servera
 	
 		static void prvServerTick();
 		
-	#### Implement function prvServerTick on line 1894. This function is execudet in server.
+	
+	// Implement function prvServerTick on line 1894. This function is execudet in server.
 	
 		void prvServerTick() {
 			while (1) {
@@ -102,7 +104,8 @@ portable/port.c - We've added a function "vIsEnded"
 			}
 		}
 		
-	#### Implemented function xTaskCreateAperiodic in taks.c (line 607). But it is declared in task.h (line 1319). This function just add tasks in aperiodicTaskList
+	
+	// Implemented function xTaskCreateAperiodic in taks.c (line 607). But it is declared in task.h (line 1319). This function just add tasks in aperiodicTaskList
 	
 		void xTaskCreateAperiodic(pdTASK_CODE pvTaskCode, void *pvParameters,
 			unsigned long capacityC) {
@@ -128,7 +131,8 @@ portable/port.c - We've added a function "vIsEnded"
 			vListInsertEnd(&pxWaitingAperiodicTasksLists, newItem);
 		}
 	
-	#### Function vTaskSwitchContext is the most important function in this project. See in code comment what does it do.
+	
+	// Function vTaskSwitchContext is the most important function in this project. See in code comment what does it do.
 	
 	
 ## main.c: Everithing is ours
